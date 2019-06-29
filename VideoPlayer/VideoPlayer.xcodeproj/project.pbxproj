@@ -63,6 +63,9 @@
 		713E493122C76F8800AC5E6B /* VideoPlayerVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 713E493022C76F8800AC5E6B /* VideoPlayerVM.swift */; };
 		713E493222C76F8800AC5E6B /* VideoPlayerVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 713E493022C76F8800AC5E6B /* VideoPlayerVM.swift */; };
 		713E493322C76F8800AC5E6B /* VideoPlayerVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 713E493022C76F8800AC5E6B /* VideoPlayerVM.swift */; };
+		713E493722C77C2E00AC5E6B /* APIUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 713E493622C77C2E00AC5E6B /* APIUrl.swift */; };
+		713E493822C7814300AC5E6B /* APIUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 713E493622C77C2E00AC5E6B /* APIUrl.swift */; };
+		713E493922C7814400AC5E6B /* APIUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 713E493622C77C2E00AC5E6B /* APIUrl.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,6 +114,7 @@
 		713E492822C76F2500AC5E6B /* VideoPlayer.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = VideoPlayer.storyboard; sourceTree = "<group>"; };
 		713E492C22C76F6A00AC5E6B /* VideoListVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoListVM.swift; sourceTree = "<group>"; };
 		713E493022C76F8800AC5E6B /* VideoPlayerVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerVM.swift; sourceTree = "<group>"; };
+		713E493622C77C2E00AC5E6B /* APIUrl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIUrl.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -203,10 +207,9 @@
 		713E48E422C7642B00AC5E6B /* APIService */ = {
 			isa = PBXGroup;
 			children = (
+				713E493522C77C1300AC5E6B /* APIConstants */,
+				713E493422C77BFF00AC5E6B /* APIRequests */,
 				713E48F322C7665C00AC5E6B /* APIResponseModel */,
-				713E48E722C7646E00AC5E6B /* APIService.swift */,
-				713E48EB22C7660200AC5E6B /* APIRequest.swift */,
-				713E48EF22C7661300AC5E6B /* APIEnum.swift */,
 			);
 			path = APIService;
 			sourceTree = "<group>";
@@ -306,6 +309,24 @@
 				713E493022C76F8800AC5E6B /* VideoPlayerVM.swift */,
 			);
 			path = Player;
+			sourceTree = "<group>";
+		};
+		713E493422C77BFF00AC5E6B /* APIRequests */ = {
+			isa = PBXGroup;
+			children = (
+				713E48E722C7646E00AC5E6B /* APIService.swift */,
+				713E48EB22C7660200AC5E6B /* APIRequest.swift */,
+			);
+			path = APIRequests;
+			sourceTree = "<group>";
+		};
+		713E493522C77C1300AC5E6B /* APIConstants */ = {
+			isa = PBXGroup;
+			children = (
+				713E48EF22C7661300AC5E6B /* APIEnum.swift */,
+				713E493622C77C2E00AC5E6B /* APIUrl.swift */,
+			);
+			path = APIConstants;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -449,6 +470,7 @@
 				713E491D22C76EB200AC5E6B /* BaseViewController.swift in Sources */,
 				713E48EC22C7660200AC5E6B /* APIRequest.swift in Sources */,
 				713E48FA22C766D900AC5E6B /* MessageEnum.swift in Sources */,
+				713E493722C77C2E00AC5E6B /* APIUrl.swift in Sources */,
 				713E48F622C766C000AC5E6B /* ErrorMessageEnum.swift in Sources */,
 				713E490D22C7689100AC5E6B /* ExtensionString.swift in Sources */,
 				713E492522C76EDA00AC5E6B /* VideoListViewController.swift in Sources */,
@@ -473,6 +495,7 @@
 				713E492222C76ECE00AC5E6B /* VideoPlayerViewController.swift in Sources */,
 				713E490922C767D800AC5E6B /* UIExtensionColor.swift in Sources */,
 				713E48E922C7646E00AC5E6B /* APIService.swift in Sources */,
+				713E493822C7814300AC5E6B /* APIUrl.swift in Sources */,
 				713E490022C7677900AC5E6B /* Helper.swift in Sources */,
 				713E490422C7679A00AC5E6B /* ProgressHUD.swift in Sources */,
 				713E48ED22C7660200AC5E6B /* APIRequest.swift in Sources */,
@@ -497,6 +520,7 @@
 				713E492322C76ECE00AC5E6B /* VideoPlayerViewController.swift in Sources */,
 				713E490A22C767D800AC5E6B /* UIExtensionColor.swift in Sources */,
 				713E48EA22C7646E00AC5E6B /* APIService.swift in Sources */,
+				713E493922C7814400AC5E6B /* APIUrl.swift in Sources */,
 				713E490122C7677900AC5E6B /* Helper.swift in Sources */,
 				713E490522C7679A00AC5E6B /* ProgressHUD.swift in Sources */,
 				713E48EE22C7660200AC5E6B /* APIRequest.swift in Sources */,
@@ -587,7 +611,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -642,7 +666,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

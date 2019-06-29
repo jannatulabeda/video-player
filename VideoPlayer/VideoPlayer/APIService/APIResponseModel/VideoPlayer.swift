@@ -8,6 +8,11 @@
 
 import UIKit
 
-class VideoPlayer: NSObject {
-
+struct VideoPlayer: Codable {
+    var title: String
+    var presenter_name: String
+    var description: String
+    var thumbnail_url: String
+    var video_url: String
+    var video_duration: Int32
 }
