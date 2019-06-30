@@ -14,5 +14,5 @@ struct VideoPlayer: Codable {
     var description: String
     var thumbnail_url: String
     var video_url: String
-    var video_duration: Int32
+    var video_duration: Int
 }

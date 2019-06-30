@@ -17,14 +17,33 @@
                     <view key="view" contentMode="scaleToFill" id="DYd-Be-ZDf">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="i40-V8-BOu">
+                                <rect key="frame" x="0.0" y="140" width="414" height="756"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="Cq5-cv-AUD" id="DA2-YB-E8l"/>
+                                    <outlet property="delegate" destination="Cq5-cv-AUD" id="Er5-Ht-bmJ"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="i40-V8-BOu" secondAttribute="bottom" id="6kF-va-JAs"/>
+                            <constraint firstItem="i40-V8-BOu" firstAttribute="leading" secondItem="ZdD-p2-Dxq" secondAttribute="leading" id="irS-HH-q7l"/>
+                            <constraint firstItem="i40-V8-BOu" firstAttribute="trailing" secondItem="ZdD-p2-Dxq" secondAttribute="trailing" id="qMt-f8-8dE"/>
+                            <constraint firstItem="i40-V8-BOu" firstAttribute="top" secondItem="ZdD-p2-Dxq" secondAttribute="top" id="xX1-Bk-e1b"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="ZdD-p2-Dxq"/>
                     </view>
                     <navigationItem key="navigationItem" title="Play List" id="sXW-aC-eZj"/>
+                    <connections>
+                        <outlet property="tableViewVideoList" destination="i40-V8-BOu" id="dwl-X8-5bD"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9OL-xD-Es6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="336" y="-35"/>
+            <point key="canvasLocation" x="334.78260869565219" y="-35.491071428571423"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="DB7-lP-QZY">
