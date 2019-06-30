@@ -16,7 +16,9 @@ class VideoListTableViewCell: UITableViewCell {
     @IBOutlet weak var labelDescription: UILabel!
     @IBOutlet weak var labelPresenter: UILabel!
     @IBOutlet weak var labelDuration: UILabel!
-
+    var videoURL: String?
+    var pressedVideoPlayer: (() -> Void)?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -32,8 +34,12 @@ class VideoListTableViewCell: UITableViewCell {
         self.labelDescription.text = videoCellVM.videoDescription
         self.labelPresenter.text = videoCellVM.videoPresenter
         self.labelDuration.text = String(videoCellVM.videoDuration)
+        self.videoURL = videoCellVM.videoURL
     }
     
     @IBAction func videoPlayerButtonPressed(_ sender: Any) {
+        if let _pressedVideoPlayer = pressedVideoPlayer {
+            _pressedVideoPlayer()
+        }
     }
 }
