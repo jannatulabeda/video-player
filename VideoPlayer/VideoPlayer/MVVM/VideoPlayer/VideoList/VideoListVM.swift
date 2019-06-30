@@ -9,5 +9,5 @@
 import UIKit
 
 class VideoListViewModel: NSObject {
-
+    var videoList = [VideoCellVM]()
 }

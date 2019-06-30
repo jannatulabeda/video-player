@@ -14,14 +14,15 @@ class APIRequest: NSObject {
     private let apiService = APIService()
     
 
-    func getPlayList(completionHandler: @escaping([VideoPlayer]?) -> ()) {
+    func getPlayList(completionHandler: @escaping([VideoCellVM]?) -> ()) {
 
         let _url = APIUrl.GetPlayList
         apiService.request(urlString: _url, parameters: nil) { (data, URLResponse, error) in
             if let _data = data {
                 do {
                     let _playList = try JSONDecoder().decode([VideoPlayer].self, from: _data)
-                    completionHandler(_playList)
+                    let _playVMList = _playList.map( { VideoCellVM(videoPlayer: $0)} )
+                    completionHandler(_playVMList)
                 } catch let parsingError {
                     Helper.shared.log(object: parsingError)
                     completionHandler(nil)
