@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVKit
 
 class VideoListViewController: UIViewController {
 
@@ -48,6 +49,15 @@ extension VideoListViewController: UITableViewDataSource, UITableViewDelegate {
         if videoList.count > 0 {
             let _videoCellVM = videoList[indexPath.row]
             cell.setData(videoCellVM: _videoCellVM)
+            cell.pressedVideoPlayer = {
+                let player = AVPlayer(url: URL(string: _videoCellVM.videoURL!)!)
+                let playerViewController = AVPlayerViewController()
+                playerViewController.player = player
+                
+                self.present(playerViewController, animated: true) {
+                    player.play()
+                }
+            }
         }
         return cell
     }

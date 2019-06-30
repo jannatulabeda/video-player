@@ -14,6 +14,7 @@ class VideoCellVM: NSObject {
     var videoDescription: String = ""
     var videoPresenter: String = ""
     var videoDuration: String = ""
+    var videoURL: String?
     
     init(videoPlayer: VideoPlayer) {
         super.init()
@@ -22,11 +23,17 @@ class VideoCellVM: NSObject {
         videoDescription = videoPlayer.description
         videoPresenter = videoPlayer.presenter_name
         
-        let (hours,mins,sec) = self.secondsToHoursMinutesSeconds(seconds: videoPlayer.video_duration)
-        videoDuration = "\(hours):\(mins):\(sec)"
+        let (hours,mins,sec) = self.secondsToHoursMinutesSeconds(miliSeconds: videoPlayer.video_duration)
+        
+        if hours > 0 {
+            videoDuration = "\(hours):"
+        }
+        videoDuration += "\(mins):\(sec)"
+        videoURL = videoPlayer.video_url
     }
     
-    func secondsToHoursMinutesSeconds (seconds : Int) -> (Int, Int, Int) {
+    func secondsToHoursMinutesSeconds (miliSeconds : Int) -> (Int, Int, Int) {
+        let seconds = miliSeconds / 1000
         return (seconds / 3600, (seconds % 3600) / 60, (seconds % 3600) % 60)
     }
 }
