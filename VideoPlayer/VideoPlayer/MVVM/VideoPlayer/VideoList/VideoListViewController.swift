@@ -7,21 +7,23 @@
 //
 
 import UIKit
-import AVKit
 
 class VideoListViewController: UIViewController {
 
+    // MARK : - @IBOutlet
     @IBOutlet weak var tableViewVideoList: UITableView!
+    
+    // MARK : - Variables
     var videoList = [VideoCellVM]()
-
+    
+    // MARK : - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.registerCell()
+        self.setupTableView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         APIRequest.shared.getPlayList { playList in
             Helper.shared.log(object: playList)
             self.videoList = playList!
@@ -31,13 +33,15 @@ class VideoListViewController: UIViewController {
         }
     }
     
-    func registerCell() {
+    // Setup table view
+    func setupTableView() {
         tableViewVideoList.register(UINib(nibName: "VideoListTableViewCell", bundle: nil), forCellReuseIdentifier: "VideoListTableViewCell")
         tableViewVideoList.rowHeight = UITableView.automaticDimension
         tableViewVideoList.estimatedRowHeight = 600
     }
 }
 
+// MARK : - UITableViewDataSource, UITableViewDelegate
 extension VideoListViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -48,14 +52,14 @@ extension VideoListViewController: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "VideoListTableViewCell", for: indexPath) as! VideoListTableViewCell
         if videoList.count > 0 {
             let _videoCellVM = videoList[indexPath.row]
-            cell.setData(videoCellVM: _videoCellVM)
+            cell.setupData(videoCellVM: _videoCellVM)
+            
+            // Cell play button pressed
             cell.pressedVideoPlayer = {
-                let player = AVPlayer(url: URL(string: _videoCellVM.videoURL!)!)
-                let playerViewController = AVPlayerViewController()
-                playerViewController.player = player
-                
-                self.present(playerViewController, animated: true) {
-                    player.play()
+                let storyboard = UIStoryboard(name: "VideoPlayer", bundle: nil)
+                if let controller = storyboard.instantiateViewController(withIdentifier: "VideoPlayerViewController") as? VideoPlayerViewController{
+                    controller.videoURL =  _videoCellVM.videoURL!
+                    self.navigationController?.pushViewController(controller, animated: true)
                 }
             }
         }
