@@ -23,8 +23,7 @@ class VideoCellVM: NSObject {
         videoDescription = videoPlayer.description
         videoPresenter = videoPlayer.presenter_name
         
-        let (hours,mins,sec) = self.secondsToHoursMinutesSeconds(miliSeconds: videoPlayer.video_duration)
-        
+        let (hours,mins,sec) = self.miliSecondsToHoursMinutesSeconds(miliSeconds: videoPlayer.video_duration)
         if hours > 0 {
             videoDuration = "\(hours):"
         }
@@ -32,7 +31,8 @@ class VideoCellVM: NSObject {
         videoURL = videoPlayer.video_url
     }
     
-    func secondsToHoursMinutesSeconds (miliSeconds : Int) -> (Int, Int, Int) {
+    // Convert from miliseconds to seconds, mins, hours
+    func miliSecondsToHoursMinutesSeconds (miliSeconds : Int) -> (Int, Int, Int) {
         let seconds = miliSeconds / 1000
         return (seconds / 3600, (seconds % 3600) / 60, (seconds % 3600) % 60)
     }
