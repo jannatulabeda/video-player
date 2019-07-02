@@ -15,6 +15,7 @@ class VideoListViewController: UIViewController {
     
     // MARK : - Variables
     var videoList = [VideoCellVM]()
+    var isLandscape = false
     
     // MARK : - Life cycle
     override func viewDidLoad() {
@@ -36,8 +37,18 @@ class VideoListViewController: UIViewController {
     // Setup table view
     func setupTableView() {
         tableViewVideoList.register(UINib(nibName: "VideoListTableViewCell", bundle: nil), forCellReuseIdentifier: "VideoListTableViewCell")
+        tableViewVideoList.register(UINib(nibName: "VideoListLandscapeTableViewCell", bundle: nil), forCellReuseIdentifier: "VideoListLandscapeTableViewCell")
         tableViewVideoList.rowHeight = UITableView.automaticDimension
         tableViewVideoList.estimatedRowHeight = 600
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        if UIDevice.current.orientation.isLandscape {
+            isLandscape = true
+        } else {
+            isLandscape = false
+        }
+        tableViewVideoList.reloadData()
     }
 }
 
@@ -49,20 +60,40 @@ extension VideoListViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "VideoListTableViewCell", for: indexPath) as! VideoListTableViewCell
-        if videoList.count > 0 {
-            let _videoCellVM = videoList[indexPath.row]
-            cell.setupData(videoCellVM: _videoCellVM)
-            
-            // Cell play button pressed
-            cell.pressedVideoPlayer = {
-                let storyboard = UIStoryboard(name: "VideoPlayer", bundle: nil)
-                if let controller = storyboard.instantiateViewController(withIdentifier: "VideoPlayerViewController") as? VideoPlayerViewController{
-                    controller.videoURL =  _videoCellVM.videoURL!
-                    self.navigationController?.pushViewController(controller, animated: true)
+        let cell =  UITableViewCell()
+        
+        if !isLandscape {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "VideoListTableViewCell", for: indexPath) as! VideoListTableViewCell
+            if videoList.count > 0 {
+                let _videoCellVM = videoList[indexPath.row]
+                cell.setupData(videoCellVM: _videoCellVM)
+                
+                // Cell play button pressed
+                cell.pressedVideoPlayer = {
+                    let storyboard = UIStoryboard(name: "VideoPlayer", bundle: nil)
+                    if let controller = storyboard.instantiateViewController(withIdentifier: "VideoPlayerViewController") as? VideoPlayerViewController{
+                        controller.videoURL =  _videoCellVM.videoURL!
+                        self.navigationController?.pushViewController(controller, animated: true)
+                    }
                 }
             }
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "VideoListLandscapeTableViewCell", for: indexPath) as! VideoListLandscapeTableViewCell
+            if videoList.count > 0 {
+                let _videoCellVM = videoList[indexPath.row]
+                cell.setupData(videoCellVM: _videoCellVM)
+                
+                // Cell play button pressed
+                cell.pressedVideoPlayer = {
+                    let storyboard = UIStoryboard(name: "VideoPlayer", bundle: nil)
+                    if let controller = storyboard.instantiateViewController(withIdentifier: "VideoPlayerViewController") as? VideoPlayerViewController{
+                        controller.videoURL =  _videoCellVM.videoURL!
+                        self.navigationController?.pushViewController(controller, animated: true)
+                    }
+                }
+            }
+            return cell
         }
-        return cell
     }
 }
