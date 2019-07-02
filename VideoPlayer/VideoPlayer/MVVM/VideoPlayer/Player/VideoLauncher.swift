@@ -294,6 +294,9 @@ class VideoLauncher: NSObject {
             keyWindow.addSubview(view)
 
             videoPlayerView.closeVideoPlayer = {
+                if videoPlayerView.player != nil {
+                    videoPlayerView.player =  nil
+                }
                 view.removeFromSuperview()
                 self.closeVideoPlayer!()
             }
