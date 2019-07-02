@@ -89,7 +89,26 @@ class VideoPlayerView: UIView {
         return slider
     }()
     
-    // MARK : - Button action
+    // MARK: - Button action
+    // Handle tap gesture
+    @objc func handleTapGesture() {
+        UIView.animate(withDuration: 1.0, delay: 0,
+                       usingSpringWithDamping: 1,
+                       initialSpringVelocity: 1,
+                       options: .curveEaseOut, animations: {
+                        if self.isPlaying {
+                            if self.pausePlayButton.alpha == 1.0 {
+                                self.pausePlayButton.alpha = 0.0
+                            } else {
+                                self.pausePlayButton.alpha = 1.0
+                            }
+                        } else {
+                            self.pausePlayButton.alpha = 1.0
+                        }
+        }) { (_) in
+        }
+    }
+    
     // Slider change
     @objc func handleSliderChange() {
         if let duration = player?.currentItem?.duration {
@@ -111,6 +130,9 @@ class VideoPlayerView: UIView {
             pausePlayButton.setImage(UIImage(named: "pause"), for: .normal)
         }
         isPlaying = !isPlaying
+        if isPlaying {
+            handleTapGesture()
+        }
     }
     
     // Video close button pressed event
@@ -181,6 +203,11 @@ class VideoPlayerView: UIView {
         videoCloseButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
         videoCloseButton.widthAnchor.constraint(equalToConstant: 60).isActive = true
 
+        // Setup tap gesture
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture))
+        tap.numberOfTapsRequired = 1
+        self.addGestureRecognizer(tap)
+
         // Self properties
         backgroundColor = .black
     }
@@ -196,7 +223,7 @@ class VideoPlayerView: UIView {
             
             player?.play()
             player?.addObserver(self, forKeyPath: "currentItem.loadedTimeRanges", options: .new, context: nil)
-       
+
             let interval = CMTime(value: 1, timescale: 2)
             player?.addPeriodicTimeObserver(forInterval: interval, queue: DispatchQueue.main, using: { (progressTime) in
                 
@@ -231,6 +258,13 @@ class VideoPlayerView: UIView {
             controlsContainerView.backgroundColor = .clear
             pausePlayButton.isHidden = false
             isPlaying = true
+            UIView.animate(withDuration: 1.5, delay: 0,
+                           usingSpringWithDamping: 1,
+                           initialSpringVelocity: 1,
+                           options: .curveEaseOut, animations: {
+                            self.pausePlayButton.alpha = 0.0
+            }) { (_) in
+            }
             
             if let duration = player?.currentItem?.duration {
                 let seconds = CMTimeGetSeconds(duration)

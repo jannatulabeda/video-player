@@ -10,6 +10,8 @@
 		28894DC469704B7B87AEFE4C /* Pods_VideoPlayerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E200A0F91FBB1913365FDC3 /* Pods_VideoPlayerUITests.framework */; };
 		2A37D10BEACC9EF8D4FA6F40 /* Pods_VideoPlayerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABB19B1E8FB201F44D893CA7 /* Pods_VideoPlayerTests.framework */; };
 		3B0E89A32EAB4765075E9FF2 /* Pods_VideoPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F55F018812017CB5833D3C3E /* Pods_VideoPlayer.framework */; };
+		7119585D22CB8E4D00C3D9C3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 713E48B522C7634F00AC5E6B /* AppDelegate.swift */; };
+		7119585E22CB8E4E00C3D9C3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 713E48B522C7634F00AC5E6B /* AppDelegate.swift */; };
 		713E48B622C7634F00AC5E6B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 713E48B522C7634F00AC5E6B /* AppDelegate.swift */; };
 		713E48BD22C7635000AC5E6B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 713E48BC22C7635000AC5E6B /* Assets.xcassets */; };
 		713E48C022C7635000AC5E6B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 713E48BE22C7635000AC5E6B /* LaunchScreen.storyboard */; };
@@ -674,6 +676,7 @@
 				713E48F722C766C000AC5E6B /* ErrorMessageEnum.swift in Sources */,
 				713E492622C76EDA00AC5E6B /* VideoListViewController.swift in Sources */,
 				713E48CB22C7635000AC5E6B /* VideoPlayerTests.swift in Sources */,
+				7119585D22CB8E4D00C3D9C3 /* AppDelegate.swift in Sources */,
 				713E494622C79ED200AC5E6B /* VideoCellVM.swift in Sources */,
 				713E48F122C7661300AC5E6B /* APIEnum.swift in Sources */,
 			);
@@ -701,6 +704,7 @@
 				713E48F822C766C000AC5E6B /* ErrorMessageEnum.swift in Sources */,
 				713E492722C76EDA00AC5E6B /* VideoListViewController.swift in Sources */,
 				713E48D622C7635000AC5E6B /* VideoPlayerUITests.swift in Sources */,
+				7119585E22CB8E4E00C3D9C3 /* AppDelegate.swift in Sources */,
 				713E494722C79ED200AC5E6B /* VideoCellVM.swift in Sources */,
 				713E48F222C7661300AC5E6B /* APIEnum.swift in Sources */,
 			);
