@@ -16,6 +16,7 @@ class VideoListViewController: UIViewController {
     // MARK : - Variables
     var videoList = [VideoCellVM]()
     var isLandscape = false
+    var isVideoClosed = true
     
     // MARK : - Life cycle
     override func viewDidLoad() {
@@ -59,9 +60,7 @@ extension VideoListViewController: UITableViewDataSource, UITableViewDelegate {
         return self.videoList.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell =  UITableViewCell()
-        
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {        
         if !isLandscape {
             let cell = tableView.dequeueReusableCell(withIdentifier: "VideoListTableViewCell", for: indexPath) as! VideoListTableViewCell
             if videoList.count > 0 {
@@ -70,10 +69,16 @@ extension VideoListViewController: UITableViewDataSource, UITableViewDelegate {
                 
                 // Cell play button pressed
                 cell.pressedVideoPlayer = {
-                    let storyboard = UIStoryboard(name: "VideoPlayer", bundle: nil)
-                    if let controller = storyboard.instantiateViewController(withIdentifier: "VideoPlayerViewController") as? VideoPlayerViewController{
-                        controller.videoURL =  _videoCellVM.videoURL!
-                        self.navigationController?.pushViewController(controller, animated: true)
+                    if self.isVideoClosed {
+                        let storyboard = UIStoryboard(name: "VideoPlayer", bundle: nil)
+                        if let controller = storyboard.instantiateViewController(withIdentifier: "VideoPlayerViewController") as? VideoPlayerViewController{
+                            self.isVideoClosed = false
+                            controller.videoURL =  _videoCellVM.videoURL!
+                            controller.closeVideoPlayer = {
+                                self.isVideoClosed = true
+                            }
+                            self.navigationController?.pushViewController(controller, animated: true)
+                        }
                     }
                 }
             }
@@ -86,10 +91,16 @@ extension VideoListViewController: UITableViewDataSource, UITableViewDelegate {
                 
                 // Cell play button pressed
                 cell.pressedVideoPlayer = {
-                    let storyboard = UIStoryboard(name: "VideoPlayer", bundle: nil)
-                    if let controller = storyboard.instantiateViewController(withIdentifier: "VideoPlayerViewController") as? VideoPlayerViewController{
-                        controller.videoURL =  _videoCellVM.videoURL!
-                        self.navigationController?.pushViewController(controller, animated: true)
+                    if self.isVideoClosed {
+                        let storyboard = UIStoryboard(name: "VideoPlayer", bundle: nil)
+                        if let controller = storyboard.instantiateViewController(withIdentifier: "VideoPlayerViewController") as? VideoPlayerViewController{
+                            self.isVideoClosed = false
+                            controller.videoURL =  _videoCellVM.videoURL!
+                            controller.closeVideoPlayer = {
+                                self.isVideoClosed = true
+                            }
+                            self.navigationController?.pushViewController(controller, animated: true)
+                        }
                     }
                 }
             }

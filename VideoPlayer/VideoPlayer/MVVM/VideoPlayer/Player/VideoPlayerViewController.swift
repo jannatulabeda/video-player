@@ -12,6 +12,7 @@ import AVKit
 class VideoPlayerViewController: UIViewController {
     var videoURL: String?
     var closeVideoPlayer: (() -> Void)?
+    var videoLauncher: VideoLauncher?
     
     // MARK : - Life cycle
     override func viewDidLoad() {
@@ -19,10 +20,11 @@ class VideoPlayerViewController: UIViewController {
         let value = UIInterfaceOrientation.landscapeLeft.rawValue
         UIDevice.current.setValue(value, forKey: "orientation")
         
-        let videoLauncher = VideoLauncher()
-        videoLauncher.videoLink = videoURL!
-        videoLauncher.showVideoPlayer()
-        videoLauncher.closeVideoPlayer = {
+        videoLauncher = VideoLauncher()
+        videoLauncher!.videoLink = videoURL!
+        videoLauncher!.showVideoPlayer()
+        videoLauncher!.closeVideoPlayer = {
+            self.closeVideoPlayer!()
             self.navigationController?.popViewController(animated: true)
         }
     }
@@ -34,6 +36,7 @@ class VideoPlayerViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        self.videoLauncher = nil
         Helper.shared.lockOrientation(.all)
     }
     
