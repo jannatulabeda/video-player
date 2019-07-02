@@ -155,14 +155,14 @@ class VideoPlayerView: UIView {
         
         // Setup video length label (left)
         controlsContainerView.addSubview(videoLengthLabel)
-        videoLengthLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -8).isActive = true
+        videoLengthLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -15).isActive = true
         videoLengthLabel.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         videoLengthLabel.widthAnchor.constraint(equalToConstant: 60).isActive = true
         videoLengthLabel.heightAnchor.constraint(equalToConstant: 24).isActive = true
 
         // Setup current time label (right)
         controlsContainerView.addSubview(currentTimeLabel)
-        currentTimeLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 8).isActive = true
+        currentTimeLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 15).isActive = true
         currentTimeLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -2).isActive = true
         currentTimeLabel.widthAnchor.constraint(equalToConstant: 50).isActive = true
         currentTimeLabel.heightAnchor.constraint(equalToConstant: 24).isActive = true
@@ -200,9 +200,9 @@ class VideoPlayerView: UIView {
             let interval = CMTime(value: 1, timescale: 2)
             player?.addPeriodicTimeObserver(forInterval: interval, queue: DispatchQueue.main, using: { (progressTime) in
                 
-                let seconds = CMTimeGetSeconds(progressTime)
-                let secondsString = String(format: "%02d", seconds.truncatingRemainder(dividingBy: 60))
-                let minutesString = String(format: "%02d", seconds.truncatingRemainder(dividingBy: 60))
+                let seconds = CMTimeGetSeconds(progressTime)                
+                let secondsString = String(format: "%02d", Int(seconds) % 60)
+                let minutesString = String(format: "%02d", Int(seconds) / 60)
                 
                 self.currentTimeLabel.text = "\(minutesString):\(secondsString)"
                 
